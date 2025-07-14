@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Tareas</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    li { margin: 8px 0; }
+    button { margin-left: 8px; }
+    .completada {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Lista de Tareas</h1>
+
+  <input type="text" id="tareaInput" placeholder="Escribe una tarea" />
+  <button id="agregarBtn">Agregar</button>
+
+  <p id="contador">Completadas: 0 de 0</p>
+
+  <ul id="lista"></ul>
+
+  <script>
+    const input = document.getElementById("tareaInput");
+    const boton = document.getElementById("agregarBtn");
+    const lista = document.getElementById("lista");
+    const contador = document.getElementById("contador");
+
+    boton.addEventListener("click", () => {
+      const tarea = input.value.trim();
+
+      if (tarea === "") {
+        alert("Ingresa una tarea válida");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(tarea)); // ✅ Corrección clave
+
+      const btnCompletar = document.createElement("button");
+      btnCompletar.textContent = "✅";
+      btnCompletar.addEventListener("click", () => {
+        li.classList.toggle("completada");
+        actualizarContador();
+      });
+
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "🗑️";
+      btnEliminar.addEventListener("click", () => {
+        li.remove();
+        actualizarContador();
+      });
+
+      li.appendChild(btnCompletar);
+      li.appendChild(btnEliminar);
+      lista.appendChild(li);
+
+      input.value = "";
+      input.focus();
+      actualizarContador();
+    });
+
+    function actualizarContador() {
+      const total = lista.querySelectorAll("li").length;
+      const completadas = lista.querySelectorAll(".completada").length;
+      contador.textContent = `Completadas: ${completadas} de ${total}`;
+    }
+  </script>
+</body>
+</html>

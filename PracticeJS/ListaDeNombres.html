@@ -1,0 +1,62 @@
+<!-- 🎯 RETO 1: Lista de nombres
+Enunciado:
+Crea una página donde el usuario:
+
+Escriba su nombre en un input.
+
+Al hacer clic en un botón, se agregue el nombre a una lista <ul>.
+
+Cada nombre debe tener un botón 🗑️ para eliminarlo. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de nombres</title>
+  <style>
+    body { font-family: sans-serif; }
+    li { margin: 4px 0; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Lista de nombres</h1>
+  <input type="text" id="nombreInput" placeholder="Escribe un nombre" />
+  <button id="agregarBtn">Agregar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+      const input = document.getElementById("nombreInput");
+      const boton = document.getElementById("agregarBtn");
+      const lista = document.getElementById("lista");
+
+      boton.addEventListener("click", () => {
+        const nombre = input.value.trim();
+
+        if (nombre === "") {
+          alert("Ingresa un nombre válido");
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = nombre;
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.style.backgroundColor = "red";
+        btnEliminar.style.color = "white";
+
+        btnEliminar.addEventListener("click", () => {
+          li.remove();
+        });
+
+        li.appendChild(btnEliminar);
+        lista.appendChild(li);
+
+        input.value = "";
+        input.focus();
+      });
+  </script>
+</body>
+</html>

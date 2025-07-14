@@ -1,0 +1,69 @@
+<!-- 🎯 RETO 2: Contador visual
+Enunciado:
+Haz un contador con:
+
+Un número grande en el centro (empieza en 0).
+
+Dos botones: ➕ Incrementar, ➖ Decrementar.
+
+Cada botón debe cambiar el número al hacer clic.
+
+Si el número llega a 0, el color del número es negro.
+
+Si es positivo, el color es verde. Si es negativo, es rojo. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Visual</title>
+    <style>
+        body {padding: 0; margin: 0; text-align: center; align-items: center;}
+    </style>
+</head>
+<body>
+    <h1>Contador Visual</h1>
+    <h2>Contador: <span id="contador">0</span></h2>
+    <button id="sumar">➕</button>
+    <button id="restar">➖</button>
+    <button id="reiniciar">🔄</button>
+
+    <script defer>
+        const contadorValue = document.getElementById("contador");
+        const btnSumar = document.getElementById("sumar");
+        const btnRestar = document.getElementById("restar");
+        const btnReiniciar = document.getElementById("reiniciar");
+        let contador = 0;
+
+        btnSumar.addEventListener('click', () => {
+            contador++;
+            contadorValue.textContent = contador;
+            actualizarColor();
+        })
+
+        btnRestar.addEventListener('click', () => {
+            contador--;
+            contadorValue.textContent = contador;
+            actualizarColor();
+        })
+
+        btnReiniciar.addEventListener('click', () => {
+            contador = 0;
+            contadorValue.textContent = contador;
+            actualizarColor();
+        })
+
+        function actualizarColor() {
+            if (contador > 0) {
+            contadorValue.style.color = "green";
+        } else if (contador < 0) {
+            contadorValue.style.color = "red";
+        } else {
+            contadorValue.style.color = "black"
+        }
+        }
+        
+    </script>
+</body>
+</html>

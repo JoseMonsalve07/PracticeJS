@@ -1,0 +1,69 @@
+<!-- 🧪 EJEMPLO: Lista dinámica de tareas (To-Do List)
+🎯 Objetivo:
+El usuario escribe una tarea en un input.
+
+Al hacer clic en “Agregar”, se crea un elemento <li> con la tarea.
+
+Cada tarea tendrá un botón “Eliminar” para quitarla del DOM. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+
+    <style>
+        body { font-family: sans-serif; }
+        li { margin: 4px 0; }
+        button {margin-left: 10px; }
+    </style>
+
+</head>
+
+<body>
+    <h1>Lista de tareas</h1>
+    <input type="text" id="tareaInput" placeholder="Escribe una tarea">
+    <button id="agregarBtn">Agregar</button>
+
+    <ul id="listaTareas"></ul>
+
+    <script>
+        const input = document.getElementById("tareaInput");
+        const boton = document.getElementById("agregarBtn");
+        const lista = document.getElementById("listaTareas");
+
+        boton.addEventListener("click", () => {
+            const texto = input.value.trim();
+
+            if (texto === "") {
+                alert("Escribe algo antes de agregar");
+                return;
+            }
+
+            // 1. Crear el <li>
+            const li = document.createElement("li");
+            li.textContent = texto;
+
+            // 2. Crear el botón eliminar
+            const btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "Eliminar";
+            btnEliminar.style.backgroundColor = "#e74c3c";
+            btnEliminar.style.color = "white";
+
+            // 3. Evento para eliminar este <li>
+            btnEliminar.addEventListener("click", () => {
+                li.remove();
+            });
+
+            // 4. Insertar botón al <li> y el <li> a la lista
+            li.appendChild(btnEliminar);
+            lista.appendChild(li);
+
+            // 5. Limpiar Input
+            input.value = "";
+            input.focus();
+        });
+    </script>
+</body>
+</html>
